@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threadedtreasures-deploy
+  namespace: threaded-dev  # Specify the namespace if needed
+  labels:
+    app: threadedtreasures
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: threadedtreasures
+  template:
+    metadata:
+      labels:
+        app: threadedtreasures
+    spec:
+      containers:
+        - name: threadedtreasures
+          image: venkatesh1409/threadedtreasures:0.0.1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

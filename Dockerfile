@@ -6,13 +6,13 @@ WORKDIR /app
 
 # Copy package.json and install dependencies
 COPY package*.json ./
-RUN npm install --production
+RUN npm install -g live-server
 
 # Copy source code
 COPY . .
 
 # Expose live-server port
-EXPOSE 3000
+EXPOSE 8080
 
 # Run live-server to serve src folder
-CMD ["npx", "live-server", "src", "--host=0.0.0.0", "--port=3000"]
+CMD ["live-server", "src", "--port=8080", "--host=0.0.0.0"]

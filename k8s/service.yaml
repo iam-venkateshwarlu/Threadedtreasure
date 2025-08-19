@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: threadedtreasures-service
+  namespace: threaded-dev  # Specify the namespace if needed
+  labels:
+    app: threadedtreasures
+spec: 
+  selector:
+    app: threadedtreasures
+  ports:
+    - protocol: TCP
+      port: 80          # Port exposed by the service
+      targetPort: 8080    # Port on the container to forward traffic to
+      nodePort: 30081   # Optional: specify a node port for external access
+  type: NodePort       # Change to ClusterIP, LoadBalancer, or other types as needed
