@@ -10,7 +10,7 @@ stages:
   - deploy
 
 variables:
-  IMAGE_NAME: "docker.io/venkatesh1409/threadedtreasures"
+  IMAGE_NAME: "venkatesh1409/threadedtreasures"
   IMAGE_TAG: "0.0.1"
   APP_NAME: threadedtreasures
 
