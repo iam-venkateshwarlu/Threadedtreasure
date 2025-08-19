@@ -1,18 +1,37 @@
+image: docker:20.10.16
+
+services:
+  - docker:dind # Docker-in-Docker service
+
 stages:
   - build
+  - push
   - test
   - deploy
 
 variables:
+  IMAGE_NAME: "docker.io/venkatesh1409/threadedtreasures"
+  IMAGE_TAG: "0.0.1"
   APP_NAME: threadedtreasures
+
+before_script:
+  - docker info
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+
 
 build_job:
   stage: build
   script:
     - echo "Building the application..."
-  artifacts:
-    paths:
-      - build/
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+
+push_job:
+  stage: push
+  script:
+    - echo "Pushing the Docker image..."
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+  only:
+    - main
 
 test_job:
   stage: test
