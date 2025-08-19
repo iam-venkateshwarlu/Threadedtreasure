@@ -1,0 +1,85 @@
+pipeline {
+    agent any
+
+    environment {
+        // PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" = docker
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        KUBECONFIG = "$HOME/.kube/config"
+        DOCKER_HOST = 'unix:///Users/pradyuman/.docker/run/docker.sock'
+        DOCKER_IMAGE = "venkatesh1409/ecommerce-app"
+        DOCKER_TAG   = "0.0.1"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/iam-venkateshwarlu/Docker-example.git'
+            }
+        }
+
+         stage('Login to DockerHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo "Docker user is: $DOCKER_USER"'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('app') {
+                    // sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    // sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ./app"
+                }
+            }
+        }
+
+        stage('Trivy Scan') {
+            steps {
+                sh 'trivy image --exit-code 0 --severity HIGH,CRITICAL $DOCKER_IMAGE:$DOCKER_TAG || true'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                sh '''
+                sonar-scanner \
+                  -Dsonar.login=$SONAR_TOKEN || true
+                 '''
+                }
+            }
+        }
+
+
+        stage('Push Docker Image') {
+            steps {
+                sh '''
+                    docker push $DOCKER_IMAGE:$DOCKER_TAG
+                    docker tag $DOCKER_IMAGE:$DOCKER_TAG $DOCKER_IMAGE:$DOCKER_TAG
+                    docker push $DOCKER_IMAGE:latest
+                '''
+            }
+        }
+
+        stage('Deploy to Minikube') {
+            steps {
+                script {
+                    sh '''
+                    export BUILD_NUMBER=${BUILD_NUMBER}
+                    
+                    
+                    '''
+        }
+    }
+}
+
+    }
+}
+
+// envsubst < k8s/deployment-template.yaml > k8s/deployment.yaml
+                    // kubectl apply -f k8s/deployment.yaml
+                    // kubectl apply -f k8s/service.yaml
+                    // kubectl rollout status deployment/sample-nodejs-service
+                    

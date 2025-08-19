@@ -1,0 +1,27 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  APP_NAME: threadedtreasures
+
+build_job:
+  stage: build
+  script:
+    - echo "Building the application..."
+  artifacts:
+    paths:
+      - build/
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests..."
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploying the application..."
+  only:
+    - main
