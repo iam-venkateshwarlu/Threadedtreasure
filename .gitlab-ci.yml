@@ -12,6 +12,7 @@ stages:
 variables:
   IMAGE_NAME: "venkatesh1409/threadedtreasures"
   IMAGE_TAG: "0.0.1"
+  DOCKER_TLS_CERTDIR: "" 
   APP_NAME: threadedtreasures
 
 before_script:
@@ -24,16 +25,17 @@ build_job:
   script:
     - echo "Building the application..."
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - docker images
 
 push_job:
   stage: push
   script:
     - echo "Pushing the Docker image..."
     - docker push $IMAGE_NAME:$IMAGE_TAG
-    - if [ "$CI_COMMIT_BRANCH" == "main" ]; then
-        docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest &&
-        docker push $IMAGE_NAME:latest;
-      fi
+    - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest &&
+    - docker push $IMAGE_NAME:latest
+  only:
+    - main
 
 test_job:
   stage: test
