@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/iam-venkateshwarlu/Docker-example.git'
+                git branch: 'main', url: 'https://gitlab.com/tvenkateshwarlu39/threadedtreasures.git'
             }
         }
 
@@ -41,16 +41,16 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                sh '''
-                sonar-scanner \
-                  -Dsonar.login=$SONAR_TOKEN || true
-                 '''
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+        //         sh '''
+        //         sonar-scanner \
+        //           -Dsonar.login=$SONAR_TOKEN || true
+        //          '''
+        //         }
+        //     }
+        // }
 
 
         stage('Push Docker Image') {
@@ -58,20 +58,20 @@ pipeline {
                 sh '''
                     docker push $DOCKER_IMAGE:$DOCKER_TAG
                     docker tag $DOCKER_IMAGE:$DOCKER_TAG $DOCKER_IMAGE:$DOCKER_TAG
-                    docker push $DOCKER_IMAGE:latest
+                    // docker push $DOCKER_IMAGE:latest
                 '''
             }
         }
 
-        stage('Deploy to Minikube') {
-            steps {
-                script {
-                    sh '''
-                    export BUILD_NUMBER=${BUILD_NUMBER}
+        // stage('Deploy to Minikube') {
+        //     steps {
+        //         script {
+        //             sh '''
+        //             export BUILD_NUMBER=${BUILD_NUMBER}
                     
                     
-                    '''
-        }
+        //             '''
+        // }
     }
 }
 

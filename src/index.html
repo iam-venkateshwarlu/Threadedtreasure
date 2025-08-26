@@ -1,60 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Landing Page</title>
-    <link rel="stylesheet" href="styles/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>E-Commerce Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <h1>threadedtreasures</h1>
+  <header>
+    <div class="site-header">
+      <div class="brand">
+        <h1>threadedtreasures</h1>
+      </div>
+
+      <form class="search" role="search" action="#" aria-label="Search">
+        <input type="search" name="q" placeholder="Search for Gold Jewellery, Diamond Jewellery and more..." aria-label="Search">
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+
+      <nav class="header-actions" aria-label="Account actions">
+        <a href="cart.html" class="icon" aria-label="Cart">🛒<span class="count">0</span></a>
+        <a href="wishlist.html" class="icon" aria-label="Wishlist">🤍</a>
+        <a href="profile.html" class="icon" aria-label="Profile">👤</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Banner Section (unchanged) -->
+    <section id="banner" class="carousel" aria-roledescription="carousel" tabindex="0">
+      <div class="slides-viewport">
+        <div class="slides" id="bannerSlides">
+          <a class="slide" href="bangles.html" role="group" aria-roledescription="slide" aria-label="Bangles">
+            <img src="assets/images/bangles.JPG" alt="Bangles" width="1400" height="550" loading="lazy">
+          </a>
+          <a class="slide" href="chains.html" role="group" aria-roledescription="slide" aria-label="Chains">
+            <img src="assets/images/chains.JPG" alt="Chains" width="1400" height="550" loading="lazy">
+          </a>
+          <a class="slide" href="hair-clips.html" role="group" aria-roledescription="slide" aria-label="Hair Clips">
+            <img src="assets/images/hair.JPG" alt="Hair Clips" width="1400" height="550" loading="lazy">
+          </a>
+          <a class="slide" href="rings.html" role="group" aria-roledescription="slide" aria-label="Rings">
+            <img src="assets/images/rings.JPG" alt="Rings" width="1400" height="550" loading="lazy">
+          </a>
+          <a class="slide" href="earrings.html" role="group" aria-roledescription="slide" aria-label="Earrings">
+            <img src="assets/images/earrings.JPG" alt="Earrings" width="1400" height="550" loading="lazy">
+          </a>
         </div>
-    </header>
-    
-    <main>
-        <!-- Banner Section -->
-        <section id="banner">
-            <img src="assets/images/bracelet.JPG" alt="Store Banner">
-            <div class="banner-text">
-                <!-- <h2>Welcome to Our Store</h2> -->
-                <!-- <p>Discover the best products at unbeatable prices!</p> -->
+      </div>
+
+      <button class="carousel-btn prev" aria-label="Previous slide">&lt;</button>
+      <button class="carousel-btn next" aria-label="Next slide">&gt;</button>
+      <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Banner slides"></div>
+    </section>
+
+    <!-- Featured categories: new grid matching provided design -->
+    <section id="featured-categories" class="featured">
+      <div class="featured-inner">
+        <h2>Find Your Perfect Match</h2>
+        <p class="sub">Shop by Categories</p>
+
+        <div class="category-grid">
+          <a class="category-card" href="earrings.html">
+            <div class="category-media">
+              <img src="assets/images/earrings.JPG" alt="Earrings">
             </div>
-        </section>
+            <div class="category-title">Earrings</div>
+          </a>
 
-        <!-- Categories Section -->
-        <section id="categories">
-            <h2>Featured Categories</h2>
-            <div class="category-list">
-                <a href="bangles.html" class="category-item">
-                    <img src="assets/images/bangles.JPG" alt="Bangles">
-                    <h3>Bangles</h3>
-                </a>
-                <a href="chains.html" class="category-item">
-                    <img src="assets/images/chains.JPG" alt="Chains">
-                    <h3>Chains</h3>
-                </a>
-                <a href="hair-clips.html" class="category-item">
-                    <img src="assets/images/hair.JPG" alt="Hair Clips">
-                    <h3>Hair Clips</h3>
-                </a>
-                <a href="rings.html" class="category-item">
-                    <img src="assets/images/rings.JPG" alt="Rings">
-                    <h3>Rings</h3>
-                </a>
-                <a href="earrings.html" class="category-item">
-                    <img src="assets/images/earrings.JPG" alt="Earrings">
-                    <h3>Earrings</h3>
-                </a>
+          <a class="category-card" href="finger-rings.html">
+            <div class="category-media">
+              <img src="assets/images/ring1.JPG" alt="Finger Rings">
             </div>
-        </section>
-    </main>
+            <div class="category-title">Finger Rings</div>
+          </a>
 
-    <footer>
-        <p>&copy; 2023 E-Commerce Store. All rights reserved.</p>
-    </footer>
+          <a class="category-card" href="pendants.html">
+            <div class="category-media">
+              <img src="assets/images/pendant.JPG" alt="Pendants">
+            </div>
+            <div class="category-title">Pendants</div>
+          </a>
 
-    <script src="scripts/app.js"></script>
+          <a class="category-card" href="mangalsutra.html">
+            <div class="category-media">
+              <img src="assets/images/mangalsutra.JPG" alt="Mangalsutra">
+            </div>
+            <div class="category-title">Mangalsutra</div>
+          </a>
+
+          <a class="category-card" href="bracelets.html">
+            <div class="category-media">
+              <img src="assets/images/bracelet.JPG" alt="Bracelets">
+            </div>
+            <div class="category-title">Bracelets</div>
+          </a>
+
+          <a class="category-card" href="bangles.html">
+            <div class="category-media">
+              <img src="assets/images/bangles.JPG" alt="Bangles">
+            </div>
+            <div class="category-title">Bangles</div>
+          </a>
+
+          <a class="category-card" href="chains.html">
+            <div class="category-media">
+              <img src="assets/images/chains.JPG" alt="Chains">
+            </div>
+            <div class="category-title">Chains</div>
+          </a>
+
+          <a class="category-card view-all" href="categories.html">
+            <div class="category-media view-all-media">
+              <div class="view-all-text">10+</div>
+              <div class="view-all-sub">Categories to choose from</div>
+            </div>
+            <div class="category-title">View All</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured categories (unchanged below) -->
+ 
+  </main>
+
+  <script src="scripts/app.js"></script>
 </body>
 </html>
