@@ -5,7 +5,6 @@ services:
 
 stages:
   - build
-  - push
   - test
   - deploy
 
@@ -25,17 +24,19 @@ build_job:
   script:
     - echo "Building the application..."
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
-    - docker save $IMAGE_NAME:$IMAGE_TAG -o $APP_NAME.tar
-  artifacts:
-    paths:
-      - $APP_NAME.tar 
-
-push_job:
-  stage: push
-  script:
-    - docker load -i $APP_NAME.tar
+    # - docker save $IMAGE_NAME:$IMAGE_TAG -o $APP_NAME.tar
     - docker push $IMAGE_NAME:$IMAGE_TAG 
-    - echo "Pushing the image to Docker Hub..."
+
+#   artifacts:
+#     paths:
+#       - $APP_NAME.tar 
+
+# push_job:
+#   stage: push
+#   script:
+#     - docker load -i $APP_NAME.tar
+#     - docker push $IMAGE_NAME:$IMAGE_TAG 
+#     - echo "Pushing the image to Docker Hub..."
 
 test_job:
   stage: test
