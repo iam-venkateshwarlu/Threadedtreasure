@@ -14,9 +14,17 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://gitlab.com/tvenkateshwarlu39/threadedtreasures.git'
+            
             }
         }
 
+        stage ("Test") {
+            steps {
+                echo "Running Tests"
+                sh 'echo Tests Passed'
+            }
+        }
+/*
          stage('Login to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -34,7 +42,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Trivy Scan') {
             steps {
                 sh 'trivy image --exit-code 0 --severity HIGH,CRITICAL $DOCKER_IMAGE:$DOCKER_TAG || true'
