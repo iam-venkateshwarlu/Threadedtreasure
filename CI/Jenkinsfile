@@ -25,16 +25,24 @@ pipeline {
             }
         }
 
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+        //         sh '''
+        //         sonar-scanner \
+        //         -Dsonar.projectKey=ThreadedTreasure \
+        //         -Dsonar.sources=. \
+        //         -Dsonar.host.url=http://localhost:9000 \
+        //         -Dsonar.token=$SONAR_TOKEN || true
+        //          '''
+        //         }
+        //     }
+        // }
+
         stage('SonarQube Analysis') {
             steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                sh '''
-                sonar-scanner \
-                -Dsonar.projectKey=ThreadedTreasure \
-                -Dsonar.sources=. \
-                -Dsonar.host.url=http://localhost:9000 \
-                -Dsonar.token=$SONAR_TOKEN || true
-                 '''
+                withSonarQubeEnv('MySonar') {
+                    sh 'sonar-scanner -Dsonar.projectKey=ThreadedTreasure -Dsonar.sources=.'
                 }
             }
         }
