@@ -82,16 +82,19 @@ pipeline {
                 }
             }
         }
+    }
 
 
 
-        post {
+    post {
         success {
             echo 'Pipeline succeeded!'
         }
         failure {
             echo 'Pipeline failed!'
         }
+        always {
+            echo 'This will always run after the stages.'
         }
     }
 }
