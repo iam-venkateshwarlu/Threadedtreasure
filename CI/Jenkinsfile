@@ -27,16 +27,33 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                // withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                // sh '''
+                // sonar-scanner \
+                //   -Dsonar.login=$SONAR_TOKEN || true
+                //  '''
+                withSonarQubeEnv('MySonar') {
                 sh '''
-                sonar-scanner \
-                  -Dsonar.login=$SONAR_TOKEN || true
-                 '''
+                ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                -Dsonar.projectKey=ThreadedTreasure \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://localhost:9000 \
+                -Dsonar.login=$SONAR_TOKEN
+                '''
                 }
             }
         }
     }
 }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 /*
          stage('Login to DockerHub') {
             steps {
