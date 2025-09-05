@@ -39,7 +39,7 @@ pipeline {
             }
         }
     }
-}
+
 
     post {
         success {
@@ -49,6 +49,7 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
+}
 /*
          stage('Login to DockerHub') {
             steps {
