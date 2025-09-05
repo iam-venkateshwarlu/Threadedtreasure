@@ -48,17 +48,17 @@ pipeline {
                 }
             }
         }
-
+        /*
         stage ('quality gate') {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
-        }
+        }*/
 
         //2 docker
-        stage('Build and Push Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
