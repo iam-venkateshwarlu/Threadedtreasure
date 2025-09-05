@@ -7,7 +7,7 @@ pipeline {
         KUBECONFIG = "$HOME/.kube/config"
         DOCKER_HOST = 'unix:///Users/pradyuman/.docker/run/docker.sock'
         IMAGE_NAME = "venkatesh1409/ecommerce-app"
-        IMAGE_TAG   = "0.0.1"
+        IMAGE_TAG   = "0.0.2"
         ARTIFACTORY_URL = "venkatesh1409.jfrog.io"
         DOCKER_REPO     = "docker-dev-local"
     }
@@ -77,7 +77,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'jfrog-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh '''
                  echo ">>> Logging into JFrog Artifactory..."
-                 echo $PASSWORD | docker login ${ARTIFACTORY_URL} -u $USERNAME --password-stdin
+                 docker login ${ARTIFACTORY_URL} -u $USERNAME -p $PASSWORD
 
                  echo ">>> Tagging image for Artifactory..."
                  docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${ARTIFACTORY_URL}/artifactory/${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
