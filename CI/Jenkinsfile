@@ -83,7 +83,7 @@ pipeline {
                  docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${ARTIFACTORY_URL}/artifactory/${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
 
                  echo ">>> Pushing image to Artifactory..."
-                 docker push ${ARTIFACTORY_URL}/artifactory/${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+                 docker push ${ARTIFACTORY_URL}/${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
                  '''
                 }
             }
