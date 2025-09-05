@@ -77,7 +77,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'jfrog-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh '''
                  echo ">>> Logging into JFrog Artifactory..."
-                 echo $PASSWORD | docker login venkatesh1409.jfrog.io -u $USERNAME --password-stdin
+                 echo $PASSWORD | docker login ${ARTIFACTORY_URL}/${DOCKER_REPO} -u $USERNAME --password-stdin
 
                  echo ">>> Tagging image for Artifactory..."
                  docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${ARTIFACTORY_URL}/${DOCKER_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
