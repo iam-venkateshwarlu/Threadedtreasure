@@ -7,7 +7,7 @@ pipeline {
         KUBECONFIG = "$HOME/.kube/config"
         DOCKER_HOST = 'unix:///Users/pradyuman/.docker/run/docker.sock'
 
-        IMAGE_NAME       = "ecommerce-app"
+        IMAGE_NAME       = "venkatesh1409/ecommerce-app"
         IMAGE_TAG        = "0.0.2"
         ARTIFACTORY_URL  = "venkatesh1409.jfrog.io"
         DOCKER_REPO      = "docker-dev-local"
