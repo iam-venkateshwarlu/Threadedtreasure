@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice (name:"ENV", choices:['dev', 'qa'], description: "dev")
+        choice (name:'ENV', choices:['dev', 'qa'], description: "Environment to deploy to")
     }
 
     environment {
@@ -26,10 +26,16 @@ pipeline {
 
         stage('Test') {
             steps {
-                if [$parameters.dev -eq 'dev']; then
-                echo "Running Tests"
-                sh 'echo Tests Passed'
-                fi
+                script {
+                    if (params.ENV == 'dev') {
+                        echo "Running Tests"
+                        sh 'echo Tests Passed'
+                    } else {
+                        echo "Skipping tests for ${params.ENV} environment."
+
+                    }
+                }
+                
             }
         }
 
