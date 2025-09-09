@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        choice (name:"ENV", choices:['dev', 'qa'], description: "dev")
+    }
+
     environment {
         // Adjust PATH for your system
         PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -22,8 +26,10 @@ pipeline {
 
         stage('Test') {
             steps {
+                if [$parameters.dev -eq 'dev']; then
                 echo "Running Tests"
                 sh 'echo Tests Passed'
+                fi
             }
         }
 
