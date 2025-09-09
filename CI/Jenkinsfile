@@ -39,10 +39,13 @@ pipeline {
             }
         }
 
-        stage ('run test python'){
-            steps {
-                script {
-                    sh 'python3 scripts/hello.py'
+        node {
+            Checkout scm
+            stage ('run test python') {
+                steps {
+                    script {
+                        sh 'python3 scripts/hello.py'
+                    }
                 }
             }
         }
