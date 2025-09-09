@@ -18,6 +18,10 @@ pipeline {
     }
 
     stages {
+         stage('Cleanup Workspace') {
+            cleanWs()   // Cleans Jenkins workspace, needs Workspace Cleanup Plugin installed
+        }
+        
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://gitlab.com/tvenkateshwarlu39/threadedtreasures.git'
