@@ -42,8 +42,8 @@ pipeline {
         stage ('run test python'){
             steps {
                 script {
-                    sh 'ls -l scripts'
-                    sh 'python3 scripts/hello.py'
+                    sh 'ls -l'
+                    sh 'python3 hello.py'
                 }
             }
         }
