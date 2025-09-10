@@ -18,12 +18,6 @@ pipeline {
     }
 
     stages {
-         stage('Cleanup Workspace') {
-            steps {
-             cleanWs()
-            }
-        }
-
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://gitlab.com/tvenkateshwarlu39/threadedtreasures.git'

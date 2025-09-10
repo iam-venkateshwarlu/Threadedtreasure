@@ -1,1 +1,0 @@
-print ("hello, devops from python testing")
